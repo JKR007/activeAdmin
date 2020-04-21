@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_105037) do
+ActiveRecord::Schema.define(version: 2020_04_21_112823) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 2020_04_21_105037) do
     t.text "description"
     t.string "url", null: false
     t.index ["name"], name: "index_companies_on_name", unique: true
+  end
+
+  create_table "user_card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "card_type_id"
+    t.boolean "enabled", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_type_id"], name: "index_user_card_types_on_card_type_id"
+    t.index ["enabled"], name: "index_user_card_types_on_enabled"
+    t.index ["user_id"], name: "index_user_card_types_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
