@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_114916) do
+ActiveRecord::Schema.define(version: 2020_04_21_115705) do
 
   create_table "card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2020_04_21_114916) do
     t.index ["card_type_id"], name: "index_company_card_types_on_card_type_id"
     t.index ["company_id"], name: "index_company_card_types_on_company_id"
     t.index ["enabled"], name: "index_company_card_types_on_enabled"
+  end
+
+  create_table "company_category_versions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "category_version_id"
+    t.boolean "enabled", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_version_id"], name: "index_company_category_versions_on_category_version_id"
+    t.index ["company_id"], name: "index_company_category_versions_on_company_id"
+    t.index ["enabled"], name: "index_company_category_versions_on_enabled"
   end
 
   create_table "user_card_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
