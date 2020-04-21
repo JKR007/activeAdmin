@@ -1,0 +1,2 @@
+class CategoryVersion < ApplicationRecord
+end
