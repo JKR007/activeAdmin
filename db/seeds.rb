@@ -30,4 +30,20 @@ if Rails.env.development?
   # 40.times do |id|
   #   User.find(id + 5).update!(status: 'inactive')
   # end
+
+  # 10.times do |index|
+  #   name = Faker::Science.element
+  #   CardType.create(
+  #     name: name,
+  #     display_name: name,
+  #   )
+  # end
+  # CardType.all.each do |ct|
+  #   Company.all.each do |c|
+  #     CompanyCardType.create(company_id: c.id, card_type_id: ct.id)
+  #     c.users.each do |u|
+  #       UserCardType.create(user_id: u.id, card_type_id: ct.id)
+  #     end
+  #   end
+  # end
 end

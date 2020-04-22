@@ -1,9 +1,9 @@
 ActiveAdmin.register User do
   menu label: "Users"
 
-  # preserve_default_filters!
-  # remove_filter :created_at, :updated_at, :remember_created_at, :datetime
-  filter :first_name_or_last_name_or_email_or_company_id_cont, as: :string, label: "User"
+  preserve_default_filters!
+  remove_filter :created_at, :updated_at, :remember_created_at, :datetime, :category_versions, :card_types
+  # filter :first_name_or_last_name_or_email_or_company_id_cont, as: :string, label: "Search"
 
   scope :all
   scope :active_users
@@ -13,6 +13,7 @@ ActiveAdmin.register User do
   # users table
   ################################
   index do
+    selectable_column
     column :id
     column :first_name
     column :last_name
@@ -36,6 +37,22 @@ ActiveAdmin.register User do
       row :company
       row :created_at
       row :updated_at
+    end
+
+    panel 'Category Versions' do
+      country_codes = CategoryVersion.distinct(:country_code).pluck(:country_code)
+      user_category_versions = resource.category_versions.group_by(&:category_version_id)
+      tabs do
+        country_codes.each_with_index do |country_code, idx|
+          tab country_code do
+            CategoryVersion.where(country_code: country_code, id: resource.category_versions.pluck(:category_version_id)).order(:full_name).each do |category_version|
+              div do
+                category_version.full_name
+              end
+            end
+          end
+        end
+      end
     end
   end
 
@@ -63,7 +80,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :first_name, :last_name, :email, :status, :company_id
+  permit_params :first_name, :last_name, :email, :status, :company_id, category_versions_attributes: [:id, :category_version_id, :_destroy]
   #
   # or
   #
