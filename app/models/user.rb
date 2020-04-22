@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   # devise :database_authenticatable, :validatable
+  scope :active_users, ->{ where(status: :active) }
+  scope :inactive_users, ->{ where(status: :inactive) }
 
   belongs_to :company
   has_many :card_types, class_name: 'UserCardType', dependent: :destroy
