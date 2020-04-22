@@ -70,3 +70,5 @@ gem 'devise', '~> 4.7.1'
 gem 'activeadmin', '2.7.0'
 gem 'inherited_resources', '1.11.0'
 gem 'rename'
+gem 'flattened_active_admin', '0.0.7'
+gem "bourbon"
