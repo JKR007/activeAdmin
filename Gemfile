@@ -71,4 +71,5 @@ gem 'activeadmin', '2.7.0'
 gem 'inherited_resources', '1.11.0'
 gem 'rename'
 gem 'flattened_active_admin', '0.0.7'
-gem "bourbon"
+gem 'bourbon', '7.0.0'
+gem 'faker', '2.11.0'
